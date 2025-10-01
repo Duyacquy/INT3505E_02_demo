@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block body %}
+<header class="topbar">
+  <div class="brand">SOA Library</div>
+  <div class="spacer"></div>
+  <div class="welcome">Xin chào, {{ full_name }}</div>
+  <form method="post" action="{{ url_for('auth.logout') }}">
+    <button class="btn-out" type="submit">Đăng xuất</button>
+  </form>
+</header>
+
+<main class="container">
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Quản lý sách</h2>
+      <div class="actions">
+        <input id="searchInput" placeholder="Tìm theo tên, tác giả, ISBN…" />
+        <button id="btnSearch">Tìm</button>
+        <button id="btnAdd">+ Thêm sách</button>
+      </div>
+    </div>
+    <div id="booksTableWrapper" class="table-wrapper">
+      <table id="booksTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tiêu đề</th>
+            <th>Tác giả</th>
+            <th>ISBN</th>
+            <th>Năm XB</th>
+            <th>Kho</th>
+            <th>Trống</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button id="prevPage">Trước</button>
+        <span id="pageInfo"></span>
+        <button id="nextPage">Sau</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="bookDialog">
+  <form method="dialog" class="card form">
+    <h3 id="dialogTitle">Thêm sách</h3>
+    <input type="hidden" id="bookId" />
+    <label>Tiêu đề</label>
+    <input id="title" required />
+    <label>Tác giả</label>
+    <input id="author" required />
+    <label>ISBN</label>
+    <input id="isbn" />
+    <label>Năm xuất bản</label>
+    <input id="published_year" type="number" />
+    <label>Tổng số lượng</label>
+    <input id="quantity_total" type="number" value="1" min="0" />
+    <label>Số lượng trống</label>
+    <input id="quantity_available" type="number" value="1" min="0" />
+    <menu class="dialog-actions">
+      <button id="cancelBtn">Hủy</button>
+      <button id="saveBtn" value="default">Lưu</button>
+    </menu>
+  </form>
+</dialog>
+{% endblock %}

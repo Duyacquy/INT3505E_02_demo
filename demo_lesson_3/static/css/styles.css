@@ -1,0 +1,33 @@
+:root { --bg:#0b1020; --card:#111935; --muted:#7d8dbb; --text:#e6ebff; --acc:#75a7ff; }
+*{ box-sizing:border-box; }
+body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background:var(--bg); color:var(--text); }
+a{ color:var(--acc); text-decoration:none; }
+.topbar{ display:flex; align-items:center; gap:12px; padding:12px 18px; background:#0e1630; border-bottom:1px solid #1b2652; position:sticky; top:0; }
+.brand{ font-weight:700; letter-spacing:.5px; }
+.spacer{ flex:1; }
+.welcome{ opacity:.9; margin-right:8px; }
+.btn-out{ background:#1c254c; color:var(--text); border:none; padding:8px 12px; border-radius:10px; cursor:pointer; }
+.container{ max-width:1100px; margin:28px auto; padding:0 16px; }
+.panel{ background:linear-gradient(180deg, rgba(22,34,74,.6), rgba(16,24,52,.6)); border:1px solid #1e2b5c; border-radius:16px; box-shadow:0 8px 36px rgba(0,0,0,.25); }
+.panel-head{ display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid #1d2956; }
+.panel h2{ margin:0; }
+.actions{ display:flex; gap:8px; }
+.actions input, .actions button{ padding:10px 12px; border-radius:10px; border:1px solid #223066; background:#10193a; color:var(--text); }
+.actions button{ cursor:pointer; }
+.table-wrapper{ padding:12px 16px; }
+table{ width:100%; border-collapse:collapse; }
+th, td{ text-align:left; padding:10px 8px; border-bottom:1px solid #1d2956; }
+th{ font-weight:600; color:#a9b7ef; }
+tr:hover{ background:rgba(255,255,255,.02); }
+.login-wrapper{ min-height:100vh; display:grid; place-items:center; padding:24px; }
+.card{ background:linear-gradient(180deg, rgba(22,34,74,.8), rgba(16,24,52,.8)); border:1px solid #203067; border-radius:16px; padding:18px; width:min(420px, 96vw); box-shadow:0 8px 36px rgba(0,0,0,.25); }
+.card h1{ margin-top:0; }
+.card label{ display:block; margin:12px 0 6px; color:#cfd8ff; }
+.card input{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid #2a3b7d; background:#0f1736; color:var(--text); }
+.card button{ margin-top:16px; width:100%; padding:12px; border-radius:12px; background:#3357c2; color:#fff; border:none; cursor:pointer; }
+.flash p{ margin:0 0 8px 0; padding:8px; border-radius:8px; background:#432; color:#ffdcdc; }
+.pagination{ display:flex; align-items:center; gap:8px; padding:12px 0 4px; color:#a9b7ef; }
+dialog{ border:none; border-radius:14px; padding:0; width:min(520px, 96vw); }
+dialog::backdrop{ background-color: rgba(0,0,0,.4); }
+.form{ padding:16px; }
+.dialog-actions{ display:flex; justify-content:flex-end; gap:8px; }

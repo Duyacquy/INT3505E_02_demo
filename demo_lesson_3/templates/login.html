@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="login-wrapper">
+  <form class="card" method="post" action="{{ url_for('auth.login_post') }}">
+    <h1>SOA Library — Admin</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash">
+          {% for cat, msg in messages %}
+            <p class="{{ cat }}">{{ msg }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <label>Tên đăng nhập</label>
+    <input name="username" placeholder="admin" required />
+    <label>Mật khẩu</label>
+    <input type="password" name="password" placeholder="••••••••" required />
+    <button type="submit">Đăng nhập</button>
+  </form>
+</div>
+{% endblock %}
