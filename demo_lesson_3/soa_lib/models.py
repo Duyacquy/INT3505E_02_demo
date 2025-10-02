@@ -1,4 +1,3 @@
-# soa_lib/models.py
 from sqlalchemy.sql import func
 from werkzeug.security import check_password_hash
 from soa_lib.extensions import db

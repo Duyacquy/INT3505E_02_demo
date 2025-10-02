@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask
 from soa_lib.extensions import db
 from werkzeug.security import generate_password_hash
@@ -12,7 +11,6 @@ def create_app():
 
     db.init_app(app)
 
-    # Đăng ký blueprint
     from soa_lib.controllers.auth import auth_bp
     from soa_lib.controllers.admin import admin_bp
     from soa_lib.controllers.api import api_bp
@@ -20,16 +18,15 @@ def create_app():
     app.register_blueprint(admin_bp)
     app.register_blueprint(api_bp, url_prefix="/api")
 
-    # Tạo bảng + seed admin sau khi models đã được import
     with app.app_context():
-        from soa_lib import models  # đảm bảo models được import để db biết
+        from soa_lib import models  
         db.create_all()
         seed_admin()
 
     return app
 
-def seed_admin():
-    from soa_lib.models import User  # import tại đây để tránh vòng
+def seed_admin(): 
+    from soa_lib.models import User 
     if not User.query.filter_by(username="admin").first():
         from soa_lib.extensions import db
         admin = User(

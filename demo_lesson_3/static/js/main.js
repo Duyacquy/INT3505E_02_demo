@@ -18,10 +18,10 @@ function renderTable(json) {
       <td>${escapeHtml(b.title)}</td>
       <td>${escapeHtml(b.author)}</td>
       <td>${b.isbn ?? ""}</td>
-      <td>${b.published_year ?? ""}</td>
-      <td>${b.quantity_total ?? 0}</td>
-      <td>${b.quantity_available ?? 0}</td>
-      <td>
+      <td class="menu-bar">${b.published_year ?? ""}</td>
+      <td class="menu-bar">${b.quantity_total ?? 0}</td>
+      <td class="menu-bar">${b.quantity_available ?? 0}</td>
+      <td class="menu-bar">
         <button data-id="${b.id}" class="btn-edit">Sửa</button>
         <button data-id="${b.id}" class="btn-del">Xóa</button>
       </td>
@@ -30,7 +30,6 @@ function renderTable(json) {
   }
   document.getElementById("pageInfo").textContent = `Trang ${json.page} / ${Math.ceil(json.total / json.page_size) || 1}`;
 
-  // bind actions
   document.querySelectorAll(".btn-edit").forEach(btn => btn.addEventListener("click", onEdit));
   document.querySelectorAll(".btn-del").forEach(btn => btn.addEventListener("click", onDelete));
 }

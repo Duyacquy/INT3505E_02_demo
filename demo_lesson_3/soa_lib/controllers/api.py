@@ -1,4 +1,3 @@
-# soa_lib/controllers/api.py
 from flask import Blueprint, request, jsonify
 from sqlalchemy import or_
 from soa_lib.extensions import db
