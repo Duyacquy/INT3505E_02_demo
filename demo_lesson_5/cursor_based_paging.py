@@ -68,7 +68,6 @@ def decode_cursor(token: str):
 
 
 def generate_etag(payload) -> str:
-    """Create a stable ETag from the current response payload."""
     body = json.dumps(payload, sort_keys=True, ensure_ascii=False, default=str)
     import hashlib
     return hashlib.md5(body.encode("utf-8")).hexdigest()
@@ -76,14 +75,6 @@ def generate_etag(payload) -> str:
 
 @app.get("/books")
 def list_books_cursor():
-    """
-    Cursor (keyset) pagination with optional 'search'.
-    Sorted by (updated_at ASC, id ASC).
-    Query params:
-      - search: substring in title or author (case-insensitive)
-      - limit: items per page (default 5)
-      - after: opaque cursor token (from previous response.next_cursor)
-    """
     search = request.args.get("search", "").strip().lower()
     if search:
         filtered = [b for b in books if search in b["title"].lower() or search in b["author"].lower()]

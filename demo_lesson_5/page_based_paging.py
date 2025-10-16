@@ -44,13 +44,6 @@ def generate_etag(payload) -> str:
 
 @app.get("/books")
 def list_books_page_based():
-    """
-    Page-based pagination with optional 'search'.
-    Query params:
-      - search: substring in title or author (case-insensitive)
-      - page: page number starting from 1 (default 1)
-      - page_size: items per page (default 5)
-    """
     search = request.args.get("search", "").strip().lower()
     if search:
         filtered = [b for b in books if search in b["title"].lower() or search in b["author"].lower()]

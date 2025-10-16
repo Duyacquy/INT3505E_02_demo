@@ -43,13 +43,6 @@ def generate_etag(payload) -> str:
 
 @app.get("/books")
 def list_books():
-    """
-    Offset/Limit pagination with optional 'search'.
-    Query params:
-      - search: substring in title or author (case-insensitive)
-      - limit: page size (default 5)
-      - offset: number of items to skip (default 0)
-    """
     search = request.args.get("search", "").strip().lower()
     if search:
         filtered = [b for b in books if search in b["title"].lower() or search in b["author"].lower()]
