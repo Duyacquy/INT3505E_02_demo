@@ -8,21 +8,21 @@ from datetime import datetime
 app = Flask(__name__)
 
 books = [
-    {"id": 1, "title": "1984", "author": "George Orwell", "updated_at": "2024-06-01T10:00:00Z"},
-    {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee", "updated_at": "2024-06-01T10:00:00Z"},
-    {"id": 3, "title": "The Hobbit", "author": "J.R.R. Tolkien", "updated_at": "2024-06-02T08:30:00Z"},
-    {"id": 4, "title": "Brave New World", "author": "Aldous Huxley", "updated_at": "2024-06-03T09:00:00Z"},
-    {"id": 5, "title": "Fahrenheit 451", "author": "Ray Bradbury", "updated_at": "2024-06-03T09:00:00Z"},
-    {"id": 6, "title": "Animal Farm", "author": "George Orwell", "updated_at": "2024-06-03T11:15:00Z"},
-    {"id": 7, "title": "The Catcher in the Rye", "author": "J.D. Salinger", "updated_at": "2024-06-04T13:05:00Z"},
-    {"id": 8, "title": "Lord of the Flies", "author": "William Golding", "updated_at": "2024-06-04T13:05:00Z"},
-    {"id": 9, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "updated_at": "2024-06-05T07:40:00Z"},
-    {"id": 10, "title": "Moby Dick", "author": "Herman Melville", "updated_at": "2024-06-06T10:10:00Z"},
-    {"id": 11, "title": "War and Peace", "author": "Leo Tolstoy", "updated_at": "2024-06-07T16:20:00Z"},
-    {"id": 12, "title": "Crime and Punishment", "author": "Fyodor Dostoevsky", "updated_at": "2024-06-07T16:20:00Z"},
-    {"id": 13, "title": "The Odyssey", "author": "Homer", "updated_at": "2024-06-08T19:00:00Z"},
-    {"id": 14, "title": "Ulysses", "author": "James Joyce", "updated_at": "2024-06-09T12:00:00Z"},
-    {"id": 15, "title": "The Divine Comedy", "author": "Dante Alighieri", "updated_at": "2024-06-10T09:30:00Z"},
+    {"id": 1, "title": "Sapiens: A Brief History of Humankind", "author": "Yuval Noah Harari", "updated_at": "2024-06-01T10:00:00Z"},
+    {"id": 2, "title": "Educated", "author": "Tara Westover", "updated_at": "2024-06-01T10:00:00Z"},
+    {"id": 3, "title": "The Martian", "author": "Andy Weir", "updated_at": "2024-06-02T08:30:00Z"},
+    {"id": 4, "title": "Atomic Habits", "author": "James Clear", "updated_at": "2024-06-03T09:00:00Z"},
+    {"id": 5, "title": "The Alchemist", "author": "Paulo Coelho", "updated_at": "2024-06-03T09:00:00Z"},
+    {"id": 6, "title": "Thinking, Fast and Slow", "author": "Daniel Kahneman", "updated_at": "2024-06-03T11:15:00Z"},
+    {"id": 7, "title": "The Subtle Art of Not Giving a F*ck", "author": "Mark Manson", "updated_at": "2024-06-04T13:05:00Z"},
+    {"id": 8, "title": "The Midnight Library", "author": "Matt Haig", "updated_at": "2024-06-04T13:05:00Z"},
+    {"id": 9, "title": "Project Hail Mary", "author": "Andy Weir", "updated_at": "2024-06-05T07:40:00Z"},
+    {"id": 10, "title": "The Power of Now", "author": "Eckhart Tolle", "updated_at": "2024-06-06T10:10:00Z"},
+    {"id": 11, "title": "Becoming", "author": "Michelle Obama", "updated_at": "2024-06-07T16:20:00Z"},
+    {"id": 12, "title": "The Road", "author": "Cormac McCarthy", "updated_at": "2024-06-07T16:20:00Z"},
+    {"id": 13, "title": "The Name of the Wind", "author": "Patrick Rothfuss", "updated_at": "2024-06-08T19:00:00Z"},
+    {"id": 14, "title": "The Silent Patient", "author": "Alex Michaelides", "updated_at": "2024-06-09T12:00:00Z"},
+    {"id": 15, "title": "The Kite Runner", "author": "Khaled Hosseini", "updated_at": "2024-06-10T09:30:00Z"},
 ]
 
 SAMPLE_TOKEN = "hehe123"

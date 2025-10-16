@@ -7,21 +7,21 @@ import math
 app = Flask(__name__)
 
 books = [
-    {"id": 1, "title": "1984", "author": "George Orwell"},
-    {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee"},
-    {"id": 3, "title": "The Hobbit", "author": "J.R.R. Tolkien"},
-    {"id": 4, "title": "Brave New World", "author": "Aldous Huxley"},
-    {"id": 5, "title": "Fahrenheit 451", "author": "Ray Bradbury"},
-    {"id": 6, "title": "Animal Farm", "author": "George Orwell"},
-    {"id": 7, "title": "The Catcher in the Rye", "author": "J.D. Salinger"},
-    {"id": 8, "title": "Lord of the Flies", "author": "William Golding"},
-    {"id": 9, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald"},
-    {"id": 10, "title": "Moby Dick", "author": "Herman Melville"},
-    {"id": 11, "title": "War and Peace", "author": "Leo Tolstoy"},
-    {"id": 12, "title": "Crime and Punishment", "author": "Fyodor Dostoevsky"},
-    {"id": 13, "title": "The Odyssey", "author": "Homer"},
-    {"id": 14, "title": "Ulysses", "author": "James Joyce"},
-    {"id": 15, "title": "The Divine Comedy", "author": "Dante Alighieri"}
+    {"id": 1, "title": "Sapiens: A Brief History of Humankind", "author": "Yuval Noah Harari"},
+    {"id": 2, "title": "Educated", "author": "Tara Westover"},
+    {"id": 3, "title": "The Alchemist", "author": "Paulo Coelho"},
+    {"id": 4, "title": "The Road", "author": "Cormac McCarthy"},
+    {"id": 5, "title": "The Silent Patient", "author": "Alex Michaelides"},
+    {"id": 6, "title": "The Name of the Wind", "author": "Patrick Rothfuss"},
+    {"id": 7, "title": "Becoming", "author": "Michelle Obama"},
+    {"id": 8, "title": "The Subtle Art of Not Giving a F*ck", "author": "Mark Manson"},
+    {"id": 9, "title": "Thinking, Fast and Slow", "author": "Daniel Kahneman"},
+    {"id": 10, "title": "Atomic Habits", "author": "James Clear"},
+    {"id": 11, "title": "The Power of Now", "author": "Eckhart Tolle"},
+    {"id": 12, "title": "Project Hail Mary", "author": "Andy Weir"},
+    {"id": 13, "title": "The Midnight Library", "author": "Matt Haig"},
+    {"id": 14, "title": "Man’s Search for Meaning", "author": "Viktor E. Frankl"},
+    {"id": 15, "title": "The Kite Runner", "author": "Khaled Hosseini"}
 ]
 
 SAMPLE_TOKEN = "hehe123"
