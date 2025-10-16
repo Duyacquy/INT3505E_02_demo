@@ -7,7 +7,6 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Sample data (stable order by (updated_at, id))
 books = [
     {"id": 1, "title": "1984", "author": "George Orwell", "updated_at": "2024-06-01T10:00:00Z"},
     {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee", "updated_at": "2024-06-01T10:00:00Z"},
@@ -58,7 +57,6 @@ def encode_cursor(t_iso: str, last_id: int) -> str:
 
 def decode_cursor(token: str):
     try:
-        # restore padding if stripped
         padding = "=" * (-len(token) % 4)
         raw = base64.urlsafe_b64decode((token + padding).encode("utf-8"))
         obj = json.loads(raw.decode("utf-8"))
@@ -92,10 +90,8 @@ def list_books_cursor():
     else:
         filtered = books
 
-    # Sort by (updated_at, id)
     filtered_sorted = sorted(filtered, key=sort_key)
 
-    # Parse limit
     try:
         limit = int(request.args.get("limit", 5))
     except ValueError:
@@ -103,7 +99,6 @@ def list_books_cursor():
     if limit < 1:
         limit = 1
 
-    # Parse 'after' cursor
     after_token = request.args.get("after")
     start_idx = 0
     if after_token:
@@ -112,7 +107,6 @@ def list_books_cursor():
             return {"error": "Invalid cursor"}, 400
         cursor_tuple = (to_dt(t_iso), last_id)
 
-        # find first item with key > cursor_tuple
         for i, b in enumerate(filtered_sorted):
             if sort_key(b) > cursor_tuple:
                 start_idx = i
@@ -135,7 +129,6 @@ def list_books_cursor():
         "count": len(page_items),
     }
 
-    # ETag + caching
     etag = generate_etag(data)
     if request.headers.get("If-None-Match") == etag:
         resp = make_response("", 304)
@@ -169,7 +162,6 @@ def add_book():
         return {"error": "Title and author are required"}, 400
 
     new_id = (max((b["id"] for b in books), default=0) + 1)
-    # Use current time as updated_at for demo
     now = datetime.utcnow().isoformat(timespec="seconds") + "Z"
     new_book = {"id": new_id, "title": title, "author": author, "updated_at": now}
     books.append(new_book)

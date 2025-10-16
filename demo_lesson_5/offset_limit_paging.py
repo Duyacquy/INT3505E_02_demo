@@ -5,7 +5,6 @@ import json
 
 app = Flask(__name__)
 
-# Sample data (stable order by id)
 books = [
     {"id": 1, "title": "1984", "author": "George Orwell"},
     {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee"},
@@ -51,14 +50,12 @@ def list_books():
       - limit: page size (default 5)
       - offset: number of items to skip (default 0)
     """
-    # --- Search ---
     search = request.args.get("search", "").strip().lower()
     if search:
         filtered = [b for b in books if search in b["title"].lower() or search in b["author"].lower()]
     else:
         filtered = books
 
-    # --- Pagination ---
     try:
         limit = int(request.args.get("limit", 5))
     except ValueError:
@@ -68,7 +65,6 @@ def list_books():
     except ValueError:
         offset = 0
 
-    # basic guards (keep it simple)
     if limit < 1:
         limit = 1
     if offset < 0:
@@ -77,7 +73,6 @@ def list_books():
     total = len(filtered)
     page_items = filtered[offset: offset + limit]
 
-    # Build response body
     data = {
         "limit": limit,
         "offset": offset,
@@ -85,10 +80,9 @@ def list_books():
         "results": page_items,
     }
 
-    # ETag & caching
     etag = generate_etag(data)
     if request.headers.get("If-None-Match") == etag:
-        resp = make_response("", 304)  # Not Modified
+        resp = make_response("", 304)
         resp.headers["ETag"] = etag
         return resp
 

@@ -6,7 +6,6 @@ import math
 
 app = Flask(__name__)
 
-# Sample data (stable order by id)
 books = [
     {"id": 1, "title": "1984", "author": "George Orwell"},
     {"id": 2, "title": "To Kill a Mockingbird", "author": "Harper Lee"},
@@ -58,7 +57,6 @@ def list_books_page_based():
     else:
         filtered = books
 
-    # Parse page and page_size
     try:
         page = int(request.args.get("page", 1))
     except ValueError:
@@ -68,7 +66,6 @@ def list_books_page_based():
     except ValueError:
         page_size = 5
 
-    # Guards
     if page < 1:
         page = 1
     if page_size < 1:
@@ -77,7 +74,6 @@ def list_books_page_based():
     total = len(filtered)
     total_pages = max(1, math.ceil(total / page_size)) if total > 0 else 1
 
-    # Compute window
     offset = (page - 1) * page_size
     page_items = filtered[offset: offset + page_size]
 
@@ -93,7 +89,6 @@ def list_books_page_based():
         "next_page": page + 1 if page < total_pages else None,
     }
 
-    # ETag + caching
     etag = generate_etag(data)
     if request.headers.get("If-None-Match") == etag:
         resp = make_response("", 304)
