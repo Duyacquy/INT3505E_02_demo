@@ -27,7 +27,7 @@ app.get("/books", (req, res) => {
     res.json({ data: BOOKS });
 });
 
-// Protected endpoint nhưng không phân quyền (user có thể truy cập vào API của admin)
+// Endpoint của riêng admin nhưng không phân quyền (user có thể truy cập vào API của admin)
 app.get("/users", (req, res) => {
     const publicUsers = USERS.map(({ id, username, role }) => ({ id, username, role }));
     res.json({ data: publicUsers });
