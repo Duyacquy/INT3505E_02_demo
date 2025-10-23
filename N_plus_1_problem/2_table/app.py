@@ -72,9 +72,5 @@ def get_contact(contact_id: int):
             return jsonify({"data": c})
     abort(404, description="contact not found")
 
-@app.errorhandler(404)
-def _not_found(err):
-    return jsonify({"error": {"code": 404, "message": err.description}}), 404
-
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

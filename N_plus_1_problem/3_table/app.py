@@ -100,9 +100,5 @@ def list_roles():
     limit = max(1, min(limit, len(roles)))
     return jsonify({"data": roles[:limit]})
 
-@app.errorhandler(404)
-def _not_found(err):
-    return jsonify({"error": {"code": 404, "message": err.description}}), 404
-
 if __name__ == "__main__":
     app.run(port=5001, debug=True)
