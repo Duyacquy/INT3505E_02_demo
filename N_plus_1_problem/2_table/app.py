@@ -8,7 +8,7 @@ contacts = []
 cid = 1
 random.seed(42)
 for u in users:
-    for j in range(random.randint(1, 3)):
+    for j in range(random.randint(1, 2)):
         contacts.append({"id": cid, "user_id": u["id"], "email": f'{u["name"]}+{j}@example.com'})
         cid += 1
 

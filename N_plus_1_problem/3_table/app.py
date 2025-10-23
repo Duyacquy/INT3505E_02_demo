@@ -5,19 +5,18 @@ app = Flask(__name__)
 
 roles = [
     {"id": 1, "row_name": "admin"},
-    {"id": 2, "row_name": "manager"},
-    {"id": 3, "row_name": "viewer"},
+    {"id": 2, "row_name": "viewer"},
 ]
 role_by_id = {r["id"]: r for r in roles}
 
 random.seed(7)
-users = [{"id": i, "name": f"user_{i}", "role_id": random.choice([1,2,3])}
+users = [{"id": i, "name": f"user_{i}", "role_id": random.choice([1,2])}
          for i in range(1, 101)]
 
 contacts = []
 cid = 1
 for u in users:
-    for j in range(random.randint(1, 3)):
+    for j in range(random.randint(1, 2)):
         contacts.append({"id": cid, "user_id": u["id"], "email": f'{u["name"]}+{j}@example.com'})
         cid += 1
 
