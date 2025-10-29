@@ -74,3 +74,12 @@ def get_contact(contact_id: int):
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
+
+
+# 2 bảng:
+# GET http://localhost:5000/users?limit=50
+# GET http://localhost:5000/users?limit=50&include=contacts
+
+# 3 bảng:
+# GET http://localhost:5001/users?limit=100&include=contacts,role
+# GET http://localhost:5001/users?limit=100&include=contacts,role&fields[role]=row_name&fields[contacts]=email
