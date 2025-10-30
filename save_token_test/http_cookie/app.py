@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, make_response, send_from_directory
 import jwt, datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
+app.config['SECRET_KEY'] = 'duyacquy'
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -30,25 +30,6 @@ def login():
         return resp
 
     return jsonify({'message': 'Sai tài khoản hoặc mật khẩu'}), 401
-
-
-@app.route('/protected', methods=['GET'])
-def protected():
-    token = request.cookies.get('access_token')
-    if not token:
-        return jsonify({'message': 'Thiếu token'}), 401
-
-    try:
-        payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
-        return jsonify({
-            'message': 'Truy cập hợp lệ!',
-            'user': payload.get('user')
-        })
-    except jwt.ExpiredSignatureError:
-        return jsonify({'message': 'Token hết hạn'}), 401
-    except jwt.InvalidTokenError:
-        return jsonify({'message': 'Token không hợp lệ'}), 401
-
 
 @app.route('/', methods=['GET'])
 def home():

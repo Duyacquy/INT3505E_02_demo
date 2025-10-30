@@ -3,7 +3,7 @@ import jwt, datetime
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key'
+app.config['SECRET_KEY'] = 'duyacquy'
 
 @app.route('/login', methods=['POST'])
 def login():
