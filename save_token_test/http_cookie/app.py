@@ -25,7 +25,7 @@ def login():
             token,
             httponly=True,
             samesite='Lax',
-            max_age=3600
+            max_age=10
         )
         return resp
 
