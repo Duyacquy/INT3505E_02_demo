@@ -1,0 +1,222 @@
+{
+    "info": {
+      "name": "Library API Tests",
+      "_postman_id": "b1f7a3f8-1111-4a22-9abc-000000000001",
+      "description": "CRUD test suite cho Flask Library API (5 endpoints).",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "GET /books",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/books",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "books"
+            ]
+          }
+        },
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
+                "",
+                "pm.test(\"Content-Type is JSON\", () => {",
+                "  const ct = pm.response.headers.get(\"Content-Type\") || \"\";",
+                "  pm.expect(ct).to.include(\"application/json\");",
+                "});",
+                "",
+                "let data;",
+                "pm.test(\"Body is a JSON array\", () => {",
+                "  data = pm.response.json();",
+                "  pm.expect(Array.isArray(data)).to.be.true;",
+                "});",
+                "",
+                "if (data && data.length) {",
+                "  data.slice(0, Math.min(3, data.length)).forEach((item, i) => {",
+                "    pm.test(`Item[${i}] has title & author`, () => {",
+                "      pm.expect(item).to.be.an(\"object\");",
+                "      pm.expect(item).to.have.property(\"title\");",
+                "      pm.expect(item).to.have.property(\"author\");",
+                "    });",
+                "  });",
+                "} else {",
+                "  pm.test(\"List can be empty (no crash)\", () => {",
+                "    pm.expect(data).to.be.an(\"array\");",
+                "  });",
+                "}"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "POST /books",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Test Book\",\n  \"author\": \"Tester\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/books",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "books"
+            ]
+          }
+        },
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
+                "const data = pm.response.json();",
+                "pm.test(\"Response is object with id/title/author\", () => {",
+                "  pm.expect(data).to.be.an(\"object\");",
+                "  pm.expect(data).to.have.property(\"id\");",
+                "  pm.expect(data).to.have.property(\"title\");",
+                "  pm.expect(data).to.have.property(\"author\");",
+                "});",
+                "pm.environment.set(\"bookId\", data.id);"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "GET /books/{{bookId}}",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/books/{{bookId}}",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "books",
+              "{{bookId}}"
+            ]
+          }
+        },
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
+                "const data = pm.response.json();",
+                "pm.test(\"Has title & author\", () => {",
+                "  pm.expect(data).to.be.an(\"object\");",
+                "  pm.expect(data).to.have.property(\"title\");",
+                "  pm.expect(data).to.have.property(\"author\");",
+                "});"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "PUT /books/{{bookId}}",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"Updated Title\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/books/{{bookId}}",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "books",
+              "{{bookId}}"
+            ]
+          }
+        },
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
+                "const data = pm.response.json();",
+                "pm.test(\"Title updated\", () => {",
+                "  pm.expect(data).to.be.an(\"object\");",
+                "  pm.expect(data.title).to.eql(\"Updated Title\");",
+                "});"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DELETE /books/{{bookId}}",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/books/{{bookId}}",
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "path": [
+              "books",
+              "{{bookId}}"
+            ]
+          }
+        },
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
+                "const ct = pm.response.headers.get(\"Content-Type\") || \"\";",
+                "if (ct.includes(\"application/json\")) {",
+                "  const data = pm.response.json();",
+                "  pm.test(\"Message confirmed\", () => {",
+                "    pm.expect(data).to.have.property(\"message\");",
+                "  });",
+                "} else {",
+                "  pm.test(\"Deleted (non-JSON body)\", () => {",
+                "    pm.expect(pm.response.code).to.equal(200);",
+                "  });",
+                "}"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+  
