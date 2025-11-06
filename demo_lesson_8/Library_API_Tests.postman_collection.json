@@ -1,222 +1,301 @@
 {
-    "info": {
-      "name": "Library API Tests",
-      "_postman_id": "b1f7a3f8-1111-4a22-9abc-000000000001",
-      "description": "CRUD test suite cho Flask Library API (5 endpoints).",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-      {
-        "name": "GET /books",
-        "request": {
-          "method": "GET",
-          "header": [],
-          "url": {
-            "raw": "{{baseUrl}}/books",
-            "host": [
-              "{{baseUrl}}"
-            ],
-            "path": [
-              "books"
-            ]
-          }
-        },
-        "event": [
-          {
-            "listen": "test",
-            "script": {
-              "type": "text/javascript",
-              "exec": [
-                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
-                "",
-                "pm.test(\"Content-Type is JSON\", () => {",
-                "  const ct = pm.response.headers.get(\"Content-Type\") || \"\";",
-                "  pm.expect(ct).to.include(\"application/json\");",
-                "});",
-                "",
-                "let data;",
-                "pm.test(\"Body is a JSON array\", () => {",
-                "  data = pm.response.json();",
-                "  pm.expect(Array.isArray(data)).to.be.true;",
-                "});",
-                "",
-                "if (data && data.length) {",
-                "  data.slice(0, Math.min(3, data.length)).forEach((item, i) => {",
-                "    pm.test(`Item[${i}] has title & author`, () => {",
-                "      pm.expect(item).to.be.an(\"object\");",
-                "      pm.expect(item).to.have.property(\"title\");",
-                "      pm.expect(item).to.have.property(\"author\");",
-                "    });",
-                "  });",
-                "} else {",
-                "  pm.test(\"List can be empty (no crash)\", () => {",
-                "    pm.expect(data).to.be.an(\"array\");",
-                "  });",
-                "}"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "POST /books",
-        "request": {
-          "method": "POST",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"title\": \"Test Book\",\n  \"author\": \"Tester\"\n}"
-          },
-          "url": {
-            "raw": "{{baseUrl}}/books",
-            "host": [
-              "{{baseUrl}}"
-            ],
-            "path": [
-              "books"
-            ]
-          }
-        },
-        "event": [
-          {
-            "listen": "test",
-            "script": {
-              "type": "text/javascript",
-              "exec": [
-                "pm.test(\"Status 201 Created\", () => pm.response.to.have.status(201));",
-                "const data = pm.response.json();",
-                "pm.test(\"Response is object with id/title/author\", () => {",
-                "  pm.expect(data).to.be.an(\"object\");",
-                "  pm.expect(data).to.have.property(\"id\");",
-                "  pm.expect(data).to.have.property(\"title\");",
-                "  pm.expect(data).to.have.property(\"author\");",
-                "});",
-                "pm.environment.set(\"bookId\", data.id);"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "GET /books/{{bookId}}",
-        "request": {
-          "method": "GET",
-          "header": [],
-          "url": {
-            "raw": "{{baseUrl}}/books/{{bookId}}",
-            "host": [
-              "{{baseUrl}}"
-            ],
-            "path": [
-              "books",
-              "{{bookId}}"
-            ]
-          }
-        },
-        "event": [
-          {
-            "listen": "test",
-            "script": {
-              "type": "text/javascript",
-              "exec": [
-                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
-                "const data = pm.response.json();",
-                "pm.test(\"Has title & author\", () => {",
-                "  pm.expect(data).to.be.an(\"object\");",
-                "  pm.expect(data).to.have.property(\"title\");",
-                "  pm.expect(data).to.have.property(\"author\");",
-                "});"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "PUT /books/{{bookId}}",
-        "request": {
-          "method": "PUT",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"title\": \"Updated Title\"\n}"
-          },
-          "url": {
-            "raw": "{{baseUrl}}/books/{{bookId}}",
-            "host": [
-              "{{baseUrl}}"
-            ],
-            "path": [
-              "books",
-              "{{bookId}}"
-            ]
-          }
-        },
-        "event": [
-          {
-            "listen": "test",
-            "script": {
-              "type": "text/javascript",
-              "exec": [
-                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
-                "const data = pm.response.json();",
-                "pm.test(\"Title updated\", () => {",
-                "  pm.expect(data).to.be.an(\"object\");",
-                "  pm.expect(data.title).to.eql(\"Updated Title\");",
-                "});"
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "name": "DELETE /books/{{bookId}}",
-        "request": {
-          "method": "DELETE",
-          "header": [],
-          "url": {
-            "raw": "{{baseUrl}}/books/{{bookId}}",
-            "host": [
-              "{{baseUrl}}"
-            ],
-            "path": [
-              "books",
-              "{{bookId}}"
-            ]
-          }
-        },
-        "event": [
-          {
-            "listen": "test",
-            "script": {
-              "type": "text/javascript",
-              "exec": [
-                "pm.test(\"Status 200 OK\", () => pm.response.to.have.status(200));",
-                "const ct = pm.response.headers.get(\"Content-Type\") || \"\";",
-                "if (ct.includes(\"application/json\")) {",
-                "  const data = pm.response.json();",
-                "  pm.test(\"Message confirmed\", () => {",
-                "    pm.expect(data).to.have.property(\"message\");",
-                "  });",
-                "} else {",
-                "  pm.test(\"Deleted (non-JSON body)\", () => {",
-                "    pm.expect(pm.response.code).to.equal(200);",
-                "  });",
-                "}"
-              ]
-            }
-          }
-        ]
-      }
-    ]
-  }
-  
+	"info": {
+		"_postman_id": "fd9a1e48-9b30-4788-9f9b-41a49aa60868",
+		"name": "Library API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41736338"
+	},
+	"item": [
+		{
+			"name": "Get all books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200))\r",
+							"\r",
+							"{\r",
+							"    const data = pm.response.json()\r",
+							"\r",
+							"    pm.test(\"Response body is an array\", () => pm.expect(data).to.be.an('array'))\r",
+							"\r",
+							"    pm.test(\"Each item has id/title/author\", () => {\r",
+							"        data.forEach(item => {\r",
+							"            pm.expect(item).to.have.property('id')\r",
+							"            pm.expect(item).to.have.property('title')\r",
+							"            pm.expect(item).to.have.property('author')\r",
+							"        })\r",
+							"    })\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 201\", () => pm.response.to.have.status(201))\r",
+							"pm.test(\"JSON header\", () => pm.response.to.have.header(\"Content-Type\", \"application/json\"))\r",
+							"\r",
+							"{\r",
+							"    const b = pm.response.json()\r",
+							"\r",
+							"    pm.test(\"Has id/title/author\", () => {\r",
+							"        pm.expect(b).to.have.property(\"id\").that.is.a(\"number\")\r",
+							"        pm.expect(b).to.have.property(\"title\", pm.variables.get(\"newTitle\"))\r",
+							"        pm.expect(b).to.have.property(\"author\", pm.variables.get(\"newAuthor\"))\r",
+							"    })\r",
+							"\r",
+							"    pm.environment.set(\"bookId\", b.id)\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"newTitle\", \"Title \" + Math.floor(Math.random()*100000));\r",
+							"pm.variables.set(\"newAuthor\", \"Author \" + Math.floor(Math.random()*100000));"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"{{newTitle}}\",\r\n  \"author\": \"{{newAuthor}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/books",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", () => pm.response.to.have.status(200))\r",
+							"\r",
+							"{\r",
+							"    const b = pm.response.json()\r",
+							"    pm.test(\"Match created book\", () => {\r",
+							"        pm.expect(b).to.have.property(\"id\", parseInt(pm.environment.get(\"bookId\"), 10))\r",
+							"        pm.expect(b).to.have.property(\"title\")\r",
+							"        pm.expect(b).to.have.property(\"author\")\r",
+							"    })\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books/{{bookId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						"{{bookId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+							"\r",
+							"{\r",
+							"    const b = pm.response.json();\r",
+							"    pm.test(\"Updated fields and kept id unchanged\", () => {\r",
+							"        pm.expect(b).to.have.property(\"id\", parseInt(pm.environment.get(\"bookId\"), 10));\r",
+							"        pm.expect(b.title).to.match(/^Updated /);\r",
+							"        pm.expect(b.author).to.match(/^Updated /);\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated {{newTitle}}\",\r\n  \"author\": \"Updated {{newAuthor}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/books/{{bookId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						"{{bookId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+							"\r",
+							"{\r",
+							"    const r = pm.response.json();\r",
+							"    pm.test(\"Deletion message\", () => pm.expect(r).to.have.property(\"message\"));\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated {{newTitle}}\",\r\n  \"author\": \"Updated {{newAuthor}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/books/{{bookId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						"{{bookId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:5000"
+		}
+	]
+}
