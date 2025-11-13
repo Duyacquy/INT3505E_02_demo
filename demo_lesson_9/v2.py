@@ -16,7 +16,6 @@ def create_payment():
 
     print(f"Xử lý thanh toán v2 cho token {token} với ${amount}")
     
-    # Đây là phiên bản mới, không cần header đặc biệt
     response_data = {
         "status": "success",
         "version": "v2",
