@@ -14,7 +14,7 @@ def charge_card():
     card_last_four = data['card_number'][-4:]
     amount = data['amount']
     
-    print(f"[V1 CALLED] Xử lý thanh toán v1 cho thẻ *...{card_last_four} với ${amount}")
+    print(f"Xử lý thanh toán v1 cho thẻ *...{card_last_four} với ${amount}")
 
     response_data = {
         "status": "success",
