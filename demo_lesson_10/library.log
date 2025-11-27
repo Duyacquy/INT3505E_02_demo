@@ -1,0 +1,38 @@
+2025-11-27 21:12:52,185 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-11-27 21:12:52,185 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 21:12:52,185 - INFO -  * Restarting with stat
+2025-11-27 21:12:52,471 - WARNING -  * Debugger is active!
+2025-11-27 21:12:52,484 - INFO -  * Debugger PIN: 143-020-166
+2025-11-27 21:13:32,596 - INFO - 127.0.0.1 - - [27/Nov/2025 21:13:32] "[33mGET /metrics HTTP/1.1[0m" 404 -
+2025-11-27 21:13:32,772 - INFO - 127.0.0.1 - - [27/Nov/2025 21:13:32] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-11-27 21:13:45,368 - INFO - 127.0.0.1 - - [27/Nov/2025 21:13:45] "[33mGET /metrics HTTP/1.1[0m" 404 -
+2025-11-27 21:17:26,411 - INFO -  * Restarting with stat
+2025-11-27 21:17:36,982 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-11-27 21:17:36,982 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 21:17:42,384 - INFO - 127.0.0.1 - - [27/Nov/2025 21:17:42] "GET /metrics HTTP/1.1" 200 -
+2025-11-27 21:18:52,293 - INFO - Client requested book list
+2025-11-27 21:18:52,294 - INFO - 127.0.0.1 - - [27/Nov/2025 21:18:52] "GET /books HTTP/1.1" 200 -
+2025-11-27 21:22:31,478 - INFO - 127.0.0.1 - - [27/Nov/2025 21:22:31] "GET /metrics HTTP/1.1" 200 -
+2025-11-27 21:23:25,275 - INFO - Client requested book list
+2025-11-27 21:23:25,278 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:25] "GET /books HTTP/1.1" 200 -
+2025-11-27 21:23:28,084 - INFO - Client requested book list
+2025-11-27 21:23:28,085 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:28] "GET /books HTTP/1.1" 200 -
+2025-11-27 21:23:28,918 - INFO - Client requested book list
+2025-11-27 21:23:28,918 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:28] "GET /books HTTP/1.1" 200 -
+2025-11-27 21:23:29,684 - INFO - Client requested book list
+2025-11-27 21:23:29,685 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:29] "GET /books HTTP/1.1" 200 -
+2025-11-27 21:23:30,911 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:30] "GET /metrics HTTP/1.1" 200 -
+2025-11-27 21:23:41,796 - WARNING - Book lookup failed for ID: 999
+2025-11-27 21:23:41,966 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:41] "[35m[1mGET /books/999 HTTP/1.1[0m" 500 -
+2025-11-27 21:23:57,132 - INFO - 127.0.0.1 - - [27/Nov/2025 21:23:57] "GET /metrics HTTP/1.1" 200 -
+2025-11-27 21:25:41,155 - WARNING - Book lookup failed for ID: 9
+2025-11-27 21:25:41,174 - INFO - 127.0.0.1 - - [27/Nov/2025 21:25:41] "[35m[1mGET /books/9 HTTP/1.1[0m" 500 -
+2025-11-27 21:28:07,318 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-11-27 21:28:07,318 - INFO - [33mPress CTRL+C to quit[0m
+2025-11-27 21:28:12,206 - INFO - 127.0.0.1 - - [27/Nov/2025 21:28:12] "GET /metrics HTTP/1.1" 200 -
+2025-11-27 21:28:21,041 - WARNING - Book lookup failed for ID: 9
+2025-11-27 21:28:21,043 - INFO - 127.0.0.1 - - [27/Nov/2025 21:28:21] "[33mGET /books/9 HTTP/1.1[0m" 404 -
+2025-11-27 21:28:24,278 - INFO - 127.0.0.1 - - [27/Nov/2025 21:28:24] "GET /metrics HTTP/1.1" 200 -
